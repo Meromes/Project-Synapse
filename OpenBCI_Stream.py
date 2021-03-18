@@ -8,10 +8,11 @@ streams = resolve_stream('type', 'EEG')
 
 # create a new inlet to read from the stream
 inlet = StreamInlet(streams[0])
-
+samples = [0, 0, 0, 0, 0, 0, 0, 0]
 while True:
     # get a new sample (you can also omit the timestamp part if you're not
     # interested in it)
+
     sample1, timestamp1 = inlet.pull_sample()
     sample2, timestamp2 = inlet.pull_sample()
     sample3, timestamp3 = inlet.pull_sample()
@@ -20,6 +21,8 @@ while True:
     sample6, timestamp6 = inlet.pull_sample()
     sample7, timestamp7 = inlet.pull_sample()
     sample8, timestamp8 = inlet.pull_sample()
+    for i in range(0, 8):
+        samples[i] = inlet.pull_sample()
     #print(sample1)
     #print(sample2)
     #print(sample3)
@@ -28,6 +31,7 @@ while True:
     #print(sample6)
     #print(sample7)
     #print(sample8)
+    sums = [0, 0, 0, 0, 0, 0, 0, 0]
     sum1 = 0
     sum2 = 0
     sum3 = 0
@@ -45,6 +49,8 @@ while True:
         sum6 += sample6[x]
         sum7 += sample7[x]
         sum8 += sample8[x]
+        for y in range(0, 8):
+            sums[y] = samples[x]
     sum1 /= 25
     sum2 /= 25
     sum3 /= 25
@@ -53,6 +59,8 @@ while True:
     sum6 /= 25
     sum7 /= 25
     sum8 /= 25
+    for j in range(0, 8):
+        sums[j] /= 25
     print(sum1)
     print(sum2)
     print(sum3)
